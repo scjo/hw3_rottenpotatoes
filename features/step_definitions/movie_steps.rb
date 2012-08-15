@@ -17,7 +17,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
 
-  page.content.index(e1) < page.content.index(e2)
+  assert page.body.index(e1) < page.body.index(e2)
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -36,9 +36,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 end
 
 Then /I should see no movie/ do
-  page.has_css? "tr", :count => 0
+  assert page.has_css? "tr", :count => 0
 end
 
 Then /I should see all of the movies/ do
-  page.has_css? "tr", :count => Movie.all.length
+  assert page.has_css? "tr", :count => Movie.all.length
 end
